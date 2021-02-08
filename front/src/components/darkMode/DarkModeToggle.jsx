@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import darkModeStyles from "./DarkModeToggle.module.css";
 
-const DarkModeToggle = () => {
+const DarkModeToggle = ({ onChange }) => {
   const [checked, setChecked] = useState(
     localStorage.getItem("theme") === "dark" ? true : false
   );
+
   useEffect(() => {
-    localStorage.setItem("theme", "light");
+    if (localStorage.getItem("theme") === null) {
+      localStorage.setItem("theme", "light");
+    }
     document
       .getElementsByTagName("HTML")[0]
       .setAttribute("data-theme", localStorage.getItem("theme"));
@@ -29,14 +32,16 @@ const DarkModeToggle = () => {
   };
 
   return (
-    <label className={darkModeStyles.switch}>
-      <input
-        type='checkbox'
-        defaultChecked={checked}
-        onChange={() => toggleThemeChange()}
-      />
-      <span className={`${darkModeStyles.slider} ${darkModeStyles.round}`} />
-    </label>
+    <div className={darkModeStyles.switchContainer} onClick={onChange}>
+      <label className={darkModeStyles.switch}>
+        <input
+          type='checkbox'
+          defaultChecked={checked}
+          onChange={() => toggleThemeChange()}
+        />
+        <span className={`${darkModeStyles.slider} ${darkModeStyles.round}`} />
+      </label>
+    </div>
   );
 };
 

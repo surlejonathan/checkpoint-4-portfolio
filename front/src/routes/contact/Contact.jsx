@@ -1,5 +1,7 @@
 import React from "react";
 import MetaTags from "react-meta-tags";
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
 
 export default function Contact() {
   return (
@@ -10,6 +12,8 @@ export default function Contact() {
         <meta property='og:title' content='MyApp' />
         <meta property='og:image' content='path/to/image.jpg' />
       </MetaTags>
+      <Navbar />
+      <Header />
       <h1>Me contacter</h1>
     </div>
   );

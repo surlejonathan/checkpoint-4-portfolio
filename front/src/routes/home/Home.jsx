@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import MetaTags from "react-meta-tags";
-import Card from "../../components/card/Card";
-import cardStyles from "../../components/card/Card.module.css";
+import Navbar from "../../components/navbar/Navbar";
+import themeLight from "../../images/ink.mp4";
+import image from "../../images/imgDark5-b.jpg";
+import homeStyles from "../home/Home.module.css";
 
 export default function Home() {
+  let theme = localStorage.getItem("theme");
+
+  useState(() => {
+    return theme;
+  });
   return (
     <div className='main'>
       <MetaTags>
@@ -12,19 +20,39 @@ export default function Home() {
         <meta property='og:title' content='MyApp' />
         <meta property='og:image' content='path/to/image.jpg' />
       </MetaTags>
-      <h1>Bienvenue chez moi !</h1>
-      <div className={cardStyles.grid}>
-        <Card
-          path='/about'
-          title='A propos de moi...'
-          description="Quelques informations sur mes expériences professionnelles et ce qui m'a conduit à devenir développeur web, en passant par mon parcours à la Wild Code School..."
-        />
-        <Card
-          path='/projects'
-          title='Mes réalisations...'
-          imgSrc='https://images.unsplash.com/photo-1490730141103-6cac27aaab94?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
-          description="Faites un tour d'horizon de mes différents projets..."
-        />
+      <Navbar
+        className={homeStyles.Navbar}
+        menuIcon={homeStyles.menuIcon}
+        roleContainer={homeStyles.roleContainer}
+      />
+      <div className={homeStyles.Home}>
+        <div className={homeStyles.left}>
+          <header>
+            <h1 className={homeStyles.title}>
+              <span>Jonathan</span> Surle
+            </h1>
+            <p className={homeStyles.description}>
+              Développeur Web Fullstack JS
+            </p>
+          </header>
+          <div className={homeStyles.buttonContainer}>
+            <Link to='/about'>
+              <button>A propos de moi</button>
+            </Link>
+            <Link to='/projects'>
+              <button>Mes réalisations</button>
+            </Link>
+          </div>
+        </div>
+        <div className={homeStyles.right}>
+          {theme === "light" && (
+            <video className={homeStyles.video} autoPlay loop muted>
+              <source src={themeLight} type='video/mp4' />
+            </video>
+          )}
+
+          {theme === "dark" && <img src={image} />}
+        </div>
       </div>
     </div>
   );

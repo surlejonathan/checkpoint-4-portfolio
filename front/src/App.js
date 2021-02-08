@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Navbar from "./components/navbar/Navbar";
-import Header from "./components/header/Header";
+import DarkModeToggle from "./components/darkMode/DarkModeToggle";
 import Home from "./routes/home/Home.jsx";
 import About from "./routes/about/About.jsx";
 import Footer from "./components/footer/Footer";
@@ -13,12 +12,12 @@ import Contact from "./routes/contact/Contact";
 
 export default function App() {
   const [admin, setAdmin] = useState(false);
+
   return (
     <>
       <adminContext.Provider value={{ admin, setAdmin }}>
-        <Navbar />
-        <Header />
         <div className='container'>
+          <DarkModeToggle />
           <Switch>
             <Route path='/' exact component={Home} />
             <Route path='/about' exact component={About} />
@@ -31,8 +30,8 @@ export default function App() {
               <Redirect to='/admin/auth' />
             )}
           </Switch>
+          <Footer />
         </div>
-        <Footer />
       </adminContext.Provider>
     </>
   );

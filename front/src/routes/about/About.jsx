@@ -1,11 +1,15 @@
 import React from "react";
 import MetaTags from "react-meta-tags";
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
 import aboutStyles from "../about/About.module.css";
 import Portrait from "../../images/Jonathan_SURLE.jpg";
 
 export default function About() {
   return (
     <div className='main'>
+      <Navbar />
+      <Header />
       <MetaTags>
         <title>A propos</title>
         <meta name='description' content='Some description.' />

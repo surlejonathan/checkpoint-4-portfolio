@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Card from "../../components/card/Card";
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
 import MetaTags from "react-meta-tags";
 import projectStyles from "../projects/Projects.module.css";
 
 export default function Projects() {
+  let history = useHistory();
+
   const [projectList, setProjectList] = useState([]);
   const getProjects = () => {
     axios
@@ -12,6 +17,21 @@ export default function Projects() {
       .then((response) => response.data)
       .then((data) => setProjectList(data))
       .catch((err) => console.error(err));
+  };
+
+  const handleDelete = (project) => {
+    projectList.map((p) => console.log(p.idproject, project.idproject));
+    axios
+      .delete(`${process.env.REACT_APP_URL}/api/project/${project.idproject}`)
+      .then((response) => console.log(response.data))
+      .then(() =>
+        setProjectList(
+          projectList.filter((p) => project.idproject !== p.idproject)
+        )
+      )
+
+      .catch((err) => console.error(err));
+    return projectList;
   };
 
   useEffect(() => {
@@ -26,6 +46,8 @@ export default function Projects() {
         <meta property='og:title' content='MyApp' />
         <meta property='og:image' content='path/to/image.jpg' />
       </MetaTags>
+      <Navbar />
+      <Header />
       <h1>Mes Projets</h1>
       <div className={projectStyles.grid}>
         {projectList &&
@@ -37,6 +59,7 @@ export default function Projects() {
               title={project.project_name}
               imgSrc={project.project_picture}
               description={project.project_presentation}
+              onClick={() => handleDelete(project)}
             />
           ))}
       </div>

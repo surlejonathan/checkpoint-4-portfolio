@@ -8,13 +8,13 @@
 }
 
 .card {
-  height: 400px;
-  max-width: 400px;
+  max-width: 600px;
+  width: 90%;
   background-color: white;
   color: black;
-  margin: 1rem;
+  margin: 24px auto;
   flex-basis: 45%;
-  padding: 1.5rem;
+  padding: 24px 8px;
   text-align: left;
   text-decoration: none;
   border: 1px solid #eaeaea;
@@ -29,11 +29,7 @@
 .card:hover,
 .card:focus,
 .card:active {
-  background: #72f linear-gradient(145deg, #72f, #c1b);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-box-decoration-break: clone;
+  color: #72f;
   border-color: #72f;
 }
 
@@ -48,27 +44,9 @@
   line-height: 1.5;
 }
 
-.cardBody {
-  height: 134px;
-}
-
-.cardLink:hover,
-.cardLink:focus,
-.cardLink:active {
-  background: #72f linear-gradient(145deg, #72f, #c1b);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-box-decoration-break: clone;
-}
-
 @media (max-width: 600px) {
   .grid {
     width: 100%;
     flex-direction: column;
-  }
-
-  .card {
-    max-height: 350px;
   }
 }

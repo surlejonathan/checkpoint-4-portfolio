@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import adminContext from "../../contexts/adminContext";
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
 import MetaTags from "react-meta-tags";
 import formStyles from "./Admin.module.css";
 
@@ -43,6 +45,8 @@ export default function Admin() {
         <meta name='description' content='Some description.' />
         <meta property='og:title' content='MyApp' />
       </MetaTags>
+      <Navbar />
+      <Header />
       <h1>Accès Administrateur</h1>
       <form className={formStyles.formLogin} onSubmit={handleSubmit}>
         <input

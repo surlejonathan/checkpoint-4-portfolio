@@ -1,22 +1,15 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
-import adminContext from "../../contexts/adminContext";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
 import MetaTags from "react-meta-tags";
-import cardStyles from "../../components/card/Card.module.css";
+import cardStyles from "../admin/Dashboard.module.css";
 import formStyles from "../admin/Admin.module.css";
+import { FcCheckmark } from "react-icons/fc";
 
 export default function Dashboard() {
   let history = useHistory();
-
-  const { setAdmin } = useContext(adminContext);
-
-  const handleLogOut = () => {
-    localStorage.removeItem("admin");
-    setAdmin(false);
-    history.push("/");
-  };
-
   const [imageSelected, setImageSelected] = useState("");
 
   const [projectName, setProjectName] = useState("");
@@ -50,25 +43,28 @@ export default function Dashboard() {
           project_presentation: projectPresentation,
         })
         .then((response) => console.log(response.data))
+        .then(() => history.push("/projects"))
         .catch((err) => console.log(err));
+
       setProjectName("");
       setProjectPicture("");
       setProjectPresentation("");
     }
   };
 
+  console.log(imageSelected, projectPicture);
+
   return (
-    <div className='main'>
+    <>
       <MetaTags>
         <title>Dashboard</title>
         <meta name='description' content='Some description.' />
         <meta property='og:title' content='MyApp' />
         <meta property='og:image' content='path/to/image.jpg' />
       </MetaTags>
+      <Navbar />
+      <Header />
       <h1>Dashboard</h1>
-      <button type='button' onClick={handleLogOut}>
-        Se déconnecter
-      </button>
       <form
         onSubmit={handleSubmit}
         className={`${formStyles.formLogin} ${cardStyles.card}`}
@@ -99,7 +95,8 @@ export default function Dashboard() {
               data-cloudinary-field='image_id'
               data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':400,'height':300}}"
               onChange={(e) => setImageSelected(e.target.files[0])}
-            />
+            />{" "}
+            {projectPicture !== "" && <FcCheckmark />}
           </label>
 
           <button
@@ -128,6 +125,6 @@ export default function Dashboard() {
           </button>
         </div>
       </form>
-    </div>
+    </>
   );
 }
