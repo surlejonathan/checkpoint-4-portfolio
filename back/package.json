@@ -14,10 +14,8 @@
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7"
   },
-  "engines": {
-    "node": "v12.x"
-  },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   }
 }
