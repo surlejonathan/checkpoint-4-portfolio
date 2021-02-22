@@ -8,7 +8,8 @@
 }
 
 .card {
-  height: 400px;
+  max-height: 400px;
+  height: 100%;
   max-width: 400px;
   background-color: white;
   color: black;
@@ -21,6 +22,11 @@
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   box-shadow: 2px 5px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.cardImage {
+  height: 228px;
+  margin-bottom: 8px;
 }
 
 .card img {
@@ -44,22 +50,87 @@
 
 .card p {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   line-height: 1.5;
 }
 
 .cardBody {
-  height: 134px;
+  height: 100%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
+.cardLink,
+.cardLinkDisabled {
+  font-weight: bold;
+  font-style: italic;
+  transition: all 0.3s ease-in-out;
+}
 .cardLink:hover,
 .cardLink:focus,
 .cardLink:active {
-  background: #72f linear-gradient(145deg, #72f, #c1b);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-box-decoration-break: clone;
+  transform: scale(1.05);
+}
+
+.cardLink {
+  color: #72f;
+}
+.cardLinkDisabled {
+  color: rgb(63, 62, 62);
+}
+
+.cardDescription {
+  font-style: italic;
+  font-size: 1rem;
+  color: rgb(95, 92, 92);
+}
+
+.closeIcon {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.closeIcon:hover {
+  color: #72f;
+}
+
+@media (max-width: 320px) {
+  .cardBody {
+    height: 235px;
+  }
+
+  .cardImage {
+    height: 160px;
+  }
+}
+
+@media (min-width: 321px) {
+  .cardImage {
+    height: 200px;
+  }
+}
+
+@media (max-width: 400px) {
+  .cardBody {
+    height: 210px;
+  }
+}
+
+@media (min-width: 401px) {
+  .cardImage {
+    height: 228px;
+  }
+
+  .cardBody {
+    height: 180px;
+  }
 }
 
 @media (max-width: 600px) {

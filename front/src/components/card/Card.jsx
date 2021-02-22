@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import adminContext from "../../contexts/adminContext";
+import { IoClose } from "react-icons/io5";
 import cardStyles from "./Card.module.css";
 import { motion } from "framer-motion";
 
@@ -9,10 +11,12 @@ const Card = ({
   imgSrc,
   alt,
   description,
+  techno,
   onClick,
 }) => {
+  const { admin } = useContext(adminContext);
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <motion.div
         className={className}
         initial={{ scale: 0 }}
@@ -22,16 +26,25 @@ const Card = ({
         <div className={cardStyles.cardImage}>
           <img src={imgSrc} alt={alt} />
         </div>
+        <h3 className={cardStyles.cardTitle}>{title} </h3>
         <div className={cardStyles.cardBody}>
-          <h3 className={cardStyles.cardTitle}>{title} </h3>
-
-          <p className={cardStyles.cardDescription}>{description}</p>
+          <p>{description}</p>
+          <p className={cardStyles.cardDescription}>{techno}</p>
         </div>
-        <Link to={path}>
-          <p className={cardStyles.cardLink}>En savoir plus &rarr;</p>
-        </Link>
-        {localStorage.getItem("admin", "true") && (
-          <button onClick={onClick}>Supprimer</button>
+        {path !== "" ? (
+          <a href={path} rel='noreferrer' target='_blank'>
+            <p className={cardStyles.cardLink}>Lien vers le projet &rarr;</p>
+          </a>
+        ) : (
+          <p className={cardStyles.cardLinkDisabled}>
+            Lien prochainement disponible
+          </p>
+        )}
+
+        {admin && (
+          <IoClose className={cardStyles.closeIcon} onClick={onClick}>
+            Supprimer
+          </IoClose>
         )}
       </motion.div>
     </div>
